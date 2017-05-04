@@ -1,9 +1,10 @@
-package android.ksigauke.com.undertheweather;
+package android.ksigauke.com.undertheweather.dailyforecast;
 
+import android.ksigauke.com.undertheweather.R;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CurrentWeather extends AppCompatActivity {
+public class CurrentWeatherActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
