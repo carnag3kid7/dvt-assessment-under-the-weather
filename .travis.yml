@@ -17,3 +17,6 @@ script:
 
 jdk:
   - oraclejdk8  # lamba expression support
+  
+   notifications:
+    slack: kriterion-team:CJoPJ5njvecrSqbDBh6XxJ4w
