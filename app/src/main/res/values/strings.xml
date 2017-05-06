@@ -1,6 +1,10 @@
 <resources>
-    <string name="app_name">Under The Weather</string>
+    <string name="app_name">Under The
+        Weather</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-
+    <string name="wind_speed">14 ms</string>
+    <string name="current_location">Johannesburg, South Africa</string>
+    <string name="current_location_cd">Current Location Icon</string>
+    <string name="wind_speed_cd">Wind speed</string>
 </resources>
