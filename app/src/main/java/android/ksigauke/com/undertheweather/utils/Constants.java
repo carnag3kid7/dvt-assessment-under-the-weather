@@ -2,18 +2,50 @@ package android.ksigauke.com.undertheweather.utils;
 
 import android.ksigauke.com.undertheweather.R;
 
-import java.util.HashMap;
-import java.util.Map;
-
+/**
+ * https://openweathermap.org/weather-conditions
+ */
 public class Constants {
     public static final String WEATHER_UNITS = "metric";
 
-    public static final Map<String, Integer> FORECAST_DRAWABLES = new HashMap<>();
+    private static final String THUNDERSTORMS = "thunderstorm";
+    private static final String DRIZZLE = "drizzle";
+    private static final String RAIN = "rain";
+    private static final String SNOW = "snow";
+    private static final String ATMOSPHERE = "atmosphere";
+    private static final String CLEAR = "clear";
+    private static final String CLOUDS = "clouds";
+    private static final String EXTREME = "extreme";
+    private static final String ADDITIONAL = "additional";
 
-    static {
-        FORECAST_DRAWABLES.put("Rain", R.drawable.ic_rain);
-        FORECAST_DRAWABLES.put("Cloudy", R.drawable.ic_cloudy);
-        FORECAST_DRAWABLES.put("Sunny", R.drawable.ic_sun);
-        FORECAST_DRAWABLES.put("Snow", R.drawable.ic_snow);
+    public static final String OPEN_WEATHER_MAP_VERSION = "2.5";
+    public static final String API_BASE_URL = "http://api.openweathermap.org/";
+    public static int getCurrentWeatherImage(String condition) {
+        switch (condition.toLowerCase()) {
+            case THUNDERSTORMS:
+            case DRIZZLE:
+            case RAIN:
+                return R.drawable.ic_rain;
+
+            case SNOW:
+                return R.drawable.ic_snow;
+
+            case ATMOSPHERE:
+            case CLOUDS:
+                return R.drawable.ic_cloudy;
+
+            case CLEAR:
+                return R.drawable.ic_sun;
+
+            case EXTREME:
+            case ADDITIONAL:
+                return R.drawable.ic_current_weather_placeholder;
+
+            default:
+                return R.drawable.ic_current_weather_placeholder;
+
+        }
     }
+
+
 }

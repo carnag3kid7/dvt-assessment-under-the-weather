@@ -1,14 +1,29 @@
 package android.ksigauke.com.undertheweather.domain;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by KSigauke on 2017/05/04.
  */
 
 public class Main {
+    @SerializedName("temp")
+    @Expose
     private double temp;
-    private int pressure;
+
+    @SerializedName("pressure")
+    @Expose
+    private double pressure;
+
+    @SerializedName("humidity")
+    @Expose
     private int humidity;
+    @SerializedName("temp_min")
+    @Expose
     private double tempMin;
+    @SerializedName("temp_max")
+    @Expose
     private double tempMax;
 
     private Main(){}
@@ -30,11 +45,11 @@ public class Main {
         this.temp = temp;
     }
 
-    public int getPressure() {
+    public double getPressure() {
         return pressure;
     }
 
-    public void setPressure(int pressure) {
+    public void setPressure(double pressure) {
         this.pressure = pressure;
     }
 

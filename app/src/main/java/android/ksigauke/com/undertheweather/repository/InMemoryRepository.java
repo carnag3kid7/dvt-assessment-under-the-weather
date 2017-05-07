@@ -7,6 +7,7 @@ import android.ksigauke.com.undertheweather.domain.Main;
 import android.ksigauke.com.undertheweather.domain.Sys;
 import android.ksigauke.com.undertheweather.domain.Weather;
 import android.ksigauke.com.undertheweather.domain.Wind;
+import android.support.v4.util.Pair;
 
 import java.util.Arrays;
 
@@ -14,18 +15,17 @@ import java.util.Arrays;
  * Created by KSigauke on 2017/05/04.
  */
 
-public class InMemoryRepository {
+public class InMemoryRepository implements ForecastRepository {
 
-    public static final Forecast SUNNY_DAY;
+    private static final Forecast SUNNY_DAY;
 
     static {
-
         SUNNY_DAY = new Forecast.Builder()
                 .id(1)
                 .name("test city")
                 .cod(200)
                 .coordinates(new Coordinates(-25, 20))
-                .weather(Arrays.asList(new Weather(1, "Sunny", "broken clouds", "")))
+                .weather(Arrays.asList(new Weather(1, "Clouds", "broken clouds", "")))
                 .base("stations")
                 .main(new Main(15.12, 1092, 32, 21.43, 30.12))
                 .visibility(14490)
@@ -34,5 +34,11 @@ public class InMemoryRepository {
                 .dateRecorded(1493917980)
                 .sys(new Sys(1, 129, 0.439, "ZA", 1493840983, 1493890335))
                 .build();
+    }
+
+    @Override
+    public void getForecast(Pair<Double, Double> latLong, GetForecastCallback callback) {
+         //TODO: Use a thread to mock the loading of forecast data from the api
+        callback.onForecastLoaded(SUNNY_DAY);
     }
 }

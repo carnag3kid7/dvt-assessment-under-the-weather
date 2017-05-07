@@ -5,6 +5,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="wind_speed">14 ms</string>
     <string name="current_location">Johannesburg, South Africa</string>
-    <string name="current_location_cd">Current Location Icon</string>
-    <string name="wind_speed_cd">Wind speed</string>
+    <string name="cd_current_location">Current Location Icon</string>
+    <string name="cd_wind_speed">Wind speed</string>
+    <string name="cloud_percentage">12%</string>
+    <string name="cd_cloud_percentage">Cloud Percentage Icon</string>
+    <string name="max_temperature">Max 28 \u2103</string>
+    <string name="min_temperature">Min 12 \u2103</string>
+    <string name="cd_current_weather">Icon for the current weather</string>
+
+    <string name="wind_speed_text">%1$.2f ms</string>
+    <string name="max_temperature_text">Max %1$.0f \u2103</string>
+    <string name="min_temperature_text">Min %1$.0f \u2103</string>
+    <string name="weather_description">Partly Cloudly</string>
 </resources>

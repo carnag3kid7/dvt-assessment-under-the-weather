@@ -14,6 +14,7 @@ public interface ForecastContract {
         void showForecastDetails(Forecast forecast);
         void showLoadingForecastProgressBar();
     }
+
     interface Presenter{
         void openForecast(@NonNull Pair<Double, Double> latLong);
     }

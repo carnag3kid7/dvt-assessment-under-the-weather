@@ -1,6 +1,9 @@
 package android.ksigauke.com.undertheweather.domain;
 
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Forecast {
@@ -11,11 +14,23 @@ public class Forecast {
     private int id;
     private String name;
     private int cod;
+
+    @SerializedName("coord")
+    @Expose
     private Coordinates coordinates;
+
+    @SerializedName("weather")
+    @Expose
     private List<Weather> weather;
+
+    @SerializedName("main")
+    @Expose
     private Main main;
     private Wind wind;
     private Clouds clouds;
+
+    @SerializedName("sys")
+    @Expose
     private Sys sys;
 
     private Forecast() {
@@ -35,6 +50,54 @@ public class Forecast {
         wind = builder.wind;
         clouds = builder.clouds;
         sys = builder.sys;
+    }
+
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+
+    public void setCoordinates(Coordinates coordinates) {
+        this.coordinates = coordinates;
+    }
+
+    public List<Weather> getWeather() {
+        return weather;
+    }
+
+    public void setWeather(List<Weather> weather) {
+        this.weather = weather;
+    }
+
+    public Main getMain() {
+        return main;
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
+    }
+
+    public Wind getWind() {
+        return wind;
+    }
+
+    public void setWind(Wind wind) {
+        this.wind = wind;
+    }
+
+    public Clouds getClouds() {
+        return clouds;
+    }
+
+    public void setClouds(Clouds clouds) {
+        this.clouds = clouds;
+    }
+
+    public Sys getSys() {
+        return sys;
+    }
+
+    public void setSys(Sys sys) {
+        this.sys = sys;
     }
 
     public String getBase() {
