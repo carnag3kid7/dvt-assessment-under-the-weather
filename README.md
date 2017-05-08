@@ -8,4 +8,17 @@ An application that displays the current weather of where a user is located
 
 * The structure of the app follows MVP practices.
 * Data access logic follows the [Repository](https://martinfowler.com/eaaCatalog/repository.html) pattern
-* Retrofit is used as a means of connection to the openweathermap api 
+* Retrofit is used as a means of connection to the openweathermap api
+
+
+### Setup ###
+
+ * You can run the app on an emulator or mobile device.
+ * Download the apk [here](https://github.com/carnag3kid7/dvt-assessment-under-the-weather/apk/app-prod-debug.apk)
+
+
+### Screenshots ###
+
+![Alt text](https://github.com/carnag3kid7/dvt-assessment-under-the-weather/screenshots/screenshot_1.png "Screenshot 1")
+
+![Alt text](https://github.com/carnag3kid7/dvt-assessment-under-the-weather/screenshots/screenshot_2.png "Screenshot 1")
