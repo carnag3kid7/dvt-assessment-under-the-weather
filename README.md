@@ -19,4 +19,4 @@ An application that displays the current weather of where a user is located
 
 ### Screenshots ###
 
-![Alt text](https://github.com/carnag3kid7/dvt-assessment-under-the-weather/blob/master/screenshots/screenshot_1.png=400x600 "Screenshot 1")
+![Alt text](https://github.com/carnag3kid7/dvt-assessment-under-the-weather/blob/master/screenshots/screenshot_1.png =400x600 "Screenshot 1")
