@@ -2,6 +2,7 @@
     <string name="app_name">Under The
         Weather</string>
 
+
     <string name="wind_speed">14 ms</string>
     <string name="current_location">Johannesburg, South Africa</string>
     <string name="cd_current_location">Current Location Icon</string>

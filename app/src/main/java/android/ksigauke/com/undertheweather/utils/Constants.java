@@ -2,6 +2,8 @@ package android.ksigauke.com.undertheweather.utils;
 
 import android.ksigauke.com.undertheweather.R;
 
+import java.util.Locale;
+
 /**
  * The below constants are derived from the weather conditions documentation at
  * https://openweathermap.org/weather-conditions
@@ -22,7 +24,7 @@ public class Constants {
     public static final String OPEN_WEATHER_MAP_VERSION = "2.5";
     public static final String API_BASE_URL = "http://api.openweathermap.org/";
     public static int getCurrentWeatherImage(String condition) {
-        switch (condition.toLowerCase()) {
+        switch (condition.toLowerCase(Locale.getDefault())) {
             case THUNDERSTORMS:
             case DRIZZLE:
             case RAIN:
