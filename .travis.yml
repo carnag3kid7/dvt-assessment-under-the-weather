@@ -1,5 +1,6 @@
 # adopted from https://github.com/codepath/android_guides/wiki/Setting-up-Travis-CI
 language: android
+
 android:
   components:
     - tools # to get the new `repository-11.xml`
@@ -11,6 +12,11 @@ android:
 
     - sys-img-armeabi-v7a-android-25 #system image for emulator used
                                      #to run UI Tests
+
+licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 
 script:
   - ./gradlew build
