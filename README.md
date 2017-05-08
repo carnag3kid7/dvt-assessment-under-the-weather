@@ -14,11 +14,9 @@ An application that displays the current weather of where a user is located
 ### Setup ###
 
  * You can run the app on an emulator or mobile device.
- * Download the apk [here](https://github.com/carnag3kid7/dvt-assessment-under-the-weather/apk/app-prod-debug.apk)
+ * Download the apk [here](https://github.com/carnag3kid7/dvt-assessment-under-the-weather/blob/master/apk/app-prod-debug.apk)
 
 
 ### Screenshots ###
 
-![Alt text](https://github.com/carnag3kid7/dvt-assessment-under-the-weather/screenshots/screenshot_1.png "Screenshot 1")
-
-![Alt text](https://github.com/carnag3kid7/dvt-assessment-under-the-weather/screenshots/screenshot_2.png "Screenshot 1")
+![Alt text](https://github.com/carnag3kid7/dvt-assessment-under-the-weather/blob/master/screenshots/screenshot_1.png "Screenshot 1")
