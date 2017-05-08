@@ -12,7 +12,6 @@ public interface ForecastContract {
 
     interface View{
         void showForecastDetails(Forecast forecast);
-        void showLoadingForecastProgressBar();
     }
 
     interface Presenter{

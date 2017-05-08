@@ -3,6 +3,7 @@ package android.ksigauke.com.undertheweather.utils;
 import android.ksigauke.com.undertheweather.R;
 
 /**
+ * The below constants are derived from the weather conditions documentation at
  * https://openweathermap.org/weather-conditions
  */
 public class Constants {
@@ -17,7 +18,7 @@ public class Constants {
     private static final String CLOUDS = "clouds";
     private static final String EXTREME = "extreme";
     private static final String ADDITIONAL = "additional";
-
+    private static final String HAZE = "haze";
     public static final String OPEN_WEATHER_MAP_VERSION = "2.5";
     public static final String API_BASE_URL = "http://api.openweathermap.org/";
     public static int getCurrentWeatherImage(String condition) {
@@ -32,6 +33,8 @@ public class Constants {
 
             case ATMOSPHERE:
             case CLOUDS:
+                return R.drawable.ic_partly_cloudy;
+            case HAZE:
                 return R.drawable.ic_cloudy;
 
             case CLEAR:
@@ -46,6 +49,7 @@ public class Constants {
 
         }
     }
+
 
 
 }

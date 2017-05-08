@@ -2,7 +2,6 @@
     <string name="app_name">Under The
         Weather</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="wind_speed">14 ms</string>
     <string name="current_location">Johannesburg, South Africa</string>
     <string name="cd_current_location">Current Location Icon</string>
@@ -17,4 +16,5 @@
     <string name="max_temperature_text">Max %1$.0f \u2103</string>
     <string name="min_temperature_text">Min %1$.0f \u2103</string>
     <string name="weather_description">Partly Cloudly</string>
+    <string name="location_required">Failed to access you current location</string>
 </resources>

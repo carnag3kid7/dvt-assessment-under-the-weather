@@ -10,7 +10,6 @@ import android.ksigauke.com.undertheweather.repository.OpenWeatherRepository;
 public class Injection {
 
     public static ForecastRepository forecastRepository(){
-        //TODO: return an object that is able to make calls to the openweather api
         return OpenWeatherRepository.getInstance();
     }
 

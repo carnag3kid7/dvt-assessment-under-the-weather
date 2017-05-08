@@ -24,7 +24,7 @@ public class InMemoryRepository implements ForecastRepository {
                 .id(1)
                 .name("test city")
                 .cod(200)
-                .coordinates(new Coordinates(-25, 20))
+                .coordinates(new Coordinates(-26.1825267, 27.9976842))
                 .weather(Arrays.asList(new Weather(1, "Clouds", "broken clouds", "")))
                 .base("stations")
                 .main(new Main(15.12, 1092, 32, 21.43, 30.12))
@@ -38,7 +38,6 @@ public class InMemoryRepository implements ForecastRepository {
 
     @Override
     public void getForecast(Pair<Double, Double> latLong, GetForecastCallback callback) {
-         //TODO: Use a thread to mock the loading of forecast data from the api
         callback.onForecastLoaded(SUNNY_DAY);
     }
 }
