@@ -133,7 +133,8 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_READ_LOCATION);
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_READ_LOCATION);
+
         } else {
             Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
             currentWeatherPresenter.openForecast(new Pair<>(lastLocation.getLatitude(), lastLocation.getLongitude()));
@@ -179,8 +180,9 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_REQUEST_READ_LOCATION: {
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
                 {
+
                     Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
                     currentWeatherPresenter.openForecast(new Pair<>(lastLocation.getLatitude(), lastLocation.getLongitude()));
                 }
