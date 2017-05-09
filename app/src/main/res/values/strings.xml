@@ -18,4 +18,5 @@
     <string name="min_temperature_text">Min %1$.0f \u2103</string>
     <string name="weather_description">Partly Cloudly</string>
     <string name="location_required">Failed to access you current location</string>
+    <string name="location_error">Could not retrieve your location</string>
 </resources>

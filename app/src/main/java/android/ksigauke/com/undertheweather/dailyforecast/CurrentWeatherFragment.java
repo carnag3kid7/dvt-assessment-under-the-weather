@@ -1,6 +1,7 @@
 package android.ksigauke.com.undertheweather.dailyforecast;
 
 import android.Manifest;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.ksigauke.com.undertheweather.Injection;
 import android.ksigauke.com.undertheweather.R;
@@ -22,17 +23,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 
 public class CurrentWeatherFragment extends Fragment implements ForecastContract.View, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener {
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     private CurrentWeatherPresenter currentWeatherPresenter;
     private ImageView ivCurrentWeather;
@@ -47,7 +52,9 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
     private ImageView ivCloudPercentageImage;
 
     private static final int PERMISSION_REQUEST_READ_LOCATION = 1337;
+    private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private GoogleApiClient googleApiClient;
+    private LocationRequest locationRequest;
 
     public CurrentWeatherFragment() {
 
@@ -64,6 +71,11 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
                     .addApi(LocationServices.API)
                     .build();
         }
+
+        locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(10 * 100)
+                .setFastestInterval(1000);
     }
 
     @Nullable
@@ -111,7 +123,12 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
 
 
         Coordinates coordinates = forecast.getCoordinates();
-        tvCurrentLocation.setText(getLocationAddress(coordinates.getLatitude(), coordinates.getLongitude()));
+        String locationAddress = forecast.getSys().getCountry() + ", " + forecast.getName();
+
+        if (Geocoder.isPresent()) {
+            locationAddress = getLocationAddress(coordinates.getLatitude(), coordinates.getLongitude());
+        }
+        tvCurrentLocation.setText(locationAddress);
         tvWindSpeed.setText(getString(R.string.wind_speed_text, forecast.getWind().getSpeed()));
 
         tvCloudPercentage.setText(String.valueOf(forecast.getClouds().getAll() + "%"));
@@ -119,41 +136,49 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if (googleApiClient == null) {
-            googleApiClient = new GoogleApiClient.Builder(getActivity())
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
-    }
-
-    @Override
     public void onConnected(@Nullable Bundle bundle) {
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_READ_LOCATION);
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_REQUEST_READ_LOCATION);
 
         } else {
             Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+            if (lastLocation == null) {
+                LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+                return;
+            }
             currentWeatherPresenter.openForecast(new Pair<>(lastLocation.getLatitude(), lastLocation.getLongitude()));
         }
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-
+        Toast.makeText(getContext(), String.valueOf(i), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        if (connectionResult.hasResolution()) {
+            try {
+                connectionResult.startResolutionForResult(getActivity(), CONNECTION_FAILURE_RESOLUTION_REQUEST);
+            } catch (IntentSender.SendIntentException e) {
+                Toast.makeText(getContext(), getString(R.string.location_error), Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+            }
+        }
+    }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        currentWeatherPresenter.openForecast(new Pair<Double, Double>(location.getLatitude(), location.getLongitude()));
     }
 
     @Override
     public void onStart() {
-        googleApiClient.connect();
+        if (googleApiClient != null) {
+            googleApiClient.connect();
+        }
+
         super.onStart();
     }
 
@@ -165,8 +190,10 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
 
     private String getLocationAddress(Double lat, Double lon) {
         Geocoder g = new Geocoder(getContext(), Locale.getDefault());
+
         String addressLine = "";
         try {
+            List<Address> addresses = g.getFromLocation(lat, lon, 1);
             Address a = g.getFromLocation(lat, lon, 1)
                     .get(0);
             addressLine = a.getSubLocality() + ", " + a.getCountryName();
@@ -180,10 +207,12 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
             case PERMISSION_REQUEST_READ_LOCATION: {
-                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-                {
-
+                if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                     Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+                    if (lastLocation == null) {
+                        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
+                        return;
+                    }
                     currentWeatherPresenter.openForecast(new Pair<>(lastLocation.getLatitude(), lastLocation.getLongitude()));
                 }
             }

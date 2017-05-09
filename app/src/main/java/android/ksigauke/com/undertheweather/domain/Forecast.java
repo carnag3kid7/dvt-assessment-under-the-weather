@@ -12,6 +12,9 @@ public class Forecast {
     private int visibility;
     private int dateRecorded;
     private int id;
+
+    @SerializedName("name")
+    @Expose
     private String name;
     private int cod;
 

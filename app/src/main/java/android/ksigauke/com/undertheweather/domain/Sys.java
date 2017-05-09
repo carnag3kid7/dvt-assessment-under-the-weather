@@ -1,5 +1,8 @@
 package android.ksigauke.com.undertheweather.domain;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by KSigauke on 2017/05/04.
  */
@@ -8,6 +11,8 @@ public class Sys {
     private int type;
     private int id;
     private double message;
+    @SerializedName("country")
+    @Expose
     private String country;
     private long sunrise;
     private long sunset;
