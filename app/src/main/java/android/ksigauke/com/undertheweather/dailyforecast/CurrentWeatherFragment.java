@@ -33,7 +33,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Locale;
 
 public class CurrentWeatherFragment extends Fragment implements ForecastContract.View, GoogleApiClient.ConnectionCallbacks,
@@ -143,6 +142,7 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
 
         } else {
             Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+
             if (lastLocation == null) {
                 LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
                 return;
@@ -170,16 +170,15 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
 
     @Override
     public void onLocationChanged(Location location) {
-        currentWeatherPresenter.openForecast(new Pair<Double, Double>(location.getLatitude(), location.getLongitude()));
+        currentWeatherPresenter.openForecast(new Pair<>(location.getLatitude(), location.getLongitude()));
     }
 
     @Override
     public void onStart() {
-        if (googleApiClient != null) {
+        super.onStart();
+        if (!googleApiClient.isConnected()) {
             googleApiClient.connect();
         }
-
-        super.onStart();
     }
 
     @Override
@@ -193,7 +192,7 @@ public class CurrentWeatherFragment extends Fragment implements ForecastContract
 
         String addressLine = "";
         try {
-            List<Address> addresses = g.getFromLocation(lat, lon, 1);
+
             Address a = g.getFromLocation(lat, lon, 1)
                     .get(0);
             addressLine = a.getSubLocality() + ", " + a.getCountryName();
