@@ -1,33 +1,23 @@
 package android.ksigauke.com.undertheweather.domain;
 
-/**
- * Created by KSigauke on 2017/05/04.
- */
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Wind {
-    private double speed;
-    private int degrees;
 
-    public Wind(double speed, int degrees){
+    @SerializedName("speed")
+    @Expose
+    private double speed;
+
+    public Wind(double speed){
         this.speed = speed;
-        this.degrees = degrees;
     }
 
+    @SuppressWarnings("unused")
     private Wind(){}
 
     public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(double speed) {
-        this.speed = speed;
-    }
-
-    public int getDegrees() {
-        return degrees;
-    }
-
-    public void setDegrees(int degrees) {
-        this.degrees = degrees;
-    }
 }
