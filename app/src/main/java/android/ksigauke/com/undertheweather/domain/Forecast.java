@@ -73,10 +73,6 @@ public class Forecast {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public static class Builder {
         private String name;
         private Coordinates coordinates;
