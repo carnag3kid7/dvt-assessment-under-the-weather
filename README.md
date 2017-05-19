@@ -8,7 +8,7 @@ An application that displays the current weather of where a user is located
 
 * The structure of the app follows MVP practices.
 * Data access logic follows the [Repository](https://martinfowler.com/eaaCatalog/repository.html) pattern
-* Retrofit is used as a means of connection to the openweathermap api
+* Retrofit is used as a means of connection to the [openweathermap api](http://openweathermap.org/api)
 
 
 ### Setup ###
